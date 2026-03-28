@@ -2,6 +2,16 @@ import { Hero } from "@/components/marketing/Hero"
 import { PromoCard } from "@/components/marketing/PromoCard"
 import { Wrench, Shield, Clock, Star, Users, TrendingUp } from "lucide-react"
 
+interface Promo {
+  id: string
+  title: string
+  image?: string | null
+  description: string
+  discount?: number | null
+  validUntil: Date | string
+  isActive: boolean
+}
+
 import { headers } from "next/headers"
 
 async function getPromos() {
@@ -94,7 +104,7 @@ export default async function LandingPage() {
               <p className="mt-3 text-gray-500">Penawaran terbaik untuk perawatan kendaraan Anda</p>
             </div>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {promos.map((promo: { id: string; title: string; description: string; discount?: number; validUntil: string; isActive: boolean }, i: number) => (
+              {promos.map((promo: Promo, i: number) => (
                 <PromoCard key={promo.id} promo={promo} index={i} />
               ))}
             </div>
